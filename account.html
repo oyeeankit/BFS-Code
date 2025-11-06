@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account - Reorder App</title>
+    <script src="https://cdn.shopify.com/shopifycloud/polaris.js"></script>
+    <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js"></script>
+    <style>
+        body { background: #F6F6F7; }
+        .account-container { max-width: 900px; margin: 32px auto; }
+        /* Contextual Save Bar styles */
+        .contextual-save-bar {
+          position: fixed;
+          top: 16px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: var(--p-color-bg-surface, #fff);
+          border-radius: 12px;
+          box-shadow: 0 2px 8px #E1E3E5;
+          z-index: 1000;
+          min-width: 340px;
+          max-width: 480px;
+          width: 100%;
+          max-width: 480px;
+          padding: 0 24px;
+          height: 64px;
+          display: none;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          border: 1.5px solid var(--p-color-border-gradient, #E1E3E5);
+        }
+        .contextual-save-bar__content {
+          width: 100%;
+          max-width: 420px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+        }
+        .contextual-save-bar__left {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-right: auto;
+        }
+        .contextual-save-bar__right {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="account-container">
+        <s-box background="default" border="base" borderRadius="base" padding="base" style="margin-bottom:24px;">
+            <s-stack gap="base">
+                <s-text variant="heading-md" type="strong">Account Information</s-text>
+                <form id="mainForm">
+                    <s-stack gap="base">
+                        <s-text-field label="Name" id="name" name="name" value="PM TWL Live" maxLength="70" helpText="11/70" required></s-text-field>
+                        <s-text-field label="Email" id="email" name="email" value="pawan@thaliatechnologies.com" required></s-text-field>
+                        <s-text-field label="Website" id="website" name="website" value="pm-twl-live.myshopify.com" maxLength="70" helpText="25/70" disabled></s-text-field>
+                        <s-stack direction="inline" gap="base" alignItems="center" justifyContent="end">
+                            <s-text-field label="Plan" id="plan" name="plan" value="Custom - $100 per month" disabled style="flex:1;"></s-text-field>
+                            <s-button variant="secondary">Change Plan</s-button>
+                        </s-stack>
+                    </s-stack>
+                </form>
+            </s-stack>
+        </s-box>
+    </div>
+
+    <!-- Contextual Save Bar (Polaris style) -->
+    <div id="contextualSaveBar" class="contextual-save-bar">
+      <div class="contextual-save-bar__content">
+        <div class="contextual-save-bar__left">
+          <s-icon source="alert-bubble" tone="warning"></s-icon>
+          <s-text variant="body-sm" type="strong">Unsaved changes</s-text>
+        </div>
+        <div class="contextual-save-bar__right">
+          <s-button id="discardBtn" variant="secondary" type="reset">Discard</s-button>
+          <s-button id="saveBarBtn" variant="primary" type="submit">Save</s-button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    const mainForm = document.getElementById('mainForm');
+    const saveBar = document.getElementById('contextualSaveBar');
+    const discardBtn = document.getElementById('discardBtn');
+    const saveBarBtn = document.getElementById('saveBarBtn');
+    let isDirty = false;
+
+    const watchedFields = [
+      document.getElementById('name'),
+      document.getElementById('email')
+    ];
+
+    watchedFields.forEach(field => {
+      field.addEventListener('input', function() {
+        if (!isDirty) {
+          isDirty = true;
+          saveBar.style.display = 'flex';
+        }
+      });
+    });
+
+    discardBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      mainForm.reset();
+      saveBar.style.display = 'none';
+      isDirty = false;
+    });
+
+    saveBarBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      saveBarBtn.disabled = true;
+      setTimeout(function() {
+        saveBarBtn.disabled = false;
+        saveBar.style.display = 'none';
+        isDirty = false;
+      }, 1200);
+    });
+    </script>
+</body>
+</html>

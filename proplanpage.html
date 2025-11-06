@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plans - Reorder App</title>
+  <script src="https://cdn.shopify.com/shopifycloud/polaris.js"></script>
+  <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js"></script>
+  <style>
+    body { background: #F6F6F7; }
+
+    /* Feature list item layout */
+    s-list-item {
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      margin-bottom: 8px !important;
+    }
+  </style>
+</head>
+<body>
+  <s-page>
+    <s-section>
+      <s-stack gap="tight">
+        <s-text variant="heading-lg" type="strong">Choose Your Plan</s-text>
+        <s-text tone="subdued">Select the plan that best fits your business needs</s-text>
+      </s-stack>
+    </s-section>
+    <s-section>
+      <s-grid gridTemplateColumns="repeat(auto-fit, minmax(260px, 1fr))" gap="base" style="justify-content:center;">
+        <!-- Basic Plan Card -->
+  <s-box background="default" border="base" borderRadius="base" padding="base" style="max-width:180px;">
+          <s-stack gap="base">
+            <s-stack direction="inline" gap="tight" alignItems="center" justifyContent="center">
+              <s-icon source="star" color="critical" size="large" />
+            </s-stack>
+            <s-text variant="heading-md" type="strong" style="text-align:center;">Basic</s-text>
+            <s-text tone="subdued" style="text-align:center;">$20<br>per year</s-text>
+            <s-button variant="primary" disabled>Current Plan</s-button>
+            <hr style="border:none;border-top:1px solid #E1E3E5; margin:8px 0;">
+            <!-- Basic Plan Features -->
+            <s-list class="plan-card-features basic-features-list">
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>unlimited products</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>unlimited edits</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>unlimited rollbacks</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="x" /></s-stack><span style="color:#6d7175;text-decoration:line-through;">recurring task</span></s-list-item>
+            </s-list>
+          </s-stack>
+        </s-box>
+        <!-- Pro Plan Card -->
+  <s-box background="default" border="base" borderRadius="base" padding="base" style="max-width:180px;">
+          <s-stack gap="base">
+            <s-stack direction="inline" gap="tight" alignItems="center" justifyContent="center">
+              <s-icon source="lightning-bolt" color="success" size="large" />
+            </s-stack>
+            <s-text variant="heading-md" type="strong" style="text-align:center;">Pro</s-text>
+            <s-text tone="subdued" style="text-align:center;">$40<br>per year</s-text>
+            <s-button variant="primary">Upgrade to Pro</s-button>
+            <hr style="border:none;border-top:1px solid #E1E3E5; margin:8px 0;">
+            <!-- Pro Plan Features -->
+            <s-list class="plan-card-features pro-features-list">
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>unlimited products</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>unlimited edits</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>unlimited rollbacks</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>recurring task</s-list-item>
+            </s-list>
+          </s-stack>
+        </s-box>
+      </s-grid>
+    </s-section>
+</s-page>
+</body>
+</html>

@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Polaris CSS Showcase</title>
+    <link rel="stylesheet" href="https://85c662c3db56.ngrok-free.app/polaris-pm.css?v={{ time() }}" />
+    <meta name="shopify-api-key" content="a2f3f9245bb0d2051cf091adba277a1d" />
+    <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js"></script>
+    <script src="https://cdn.shopify.com/shopifycloud/polaris.js"></script>
+
+</head>
+
+<body class="p-theme-light showcase-container">
+    @include('menu')
+    <s-page heading="Polaris CSS Showcase">
+        <div slot="primary-action">
+            <s-button>Primary action</s-button>
+        </div>
+        <div slot="secondary-actions">
+            <s-button>Secondary</s-button>
+        </div>
+
+        <s-section>
+            <h1 class="Polaris-Text--heading3xl Polaris-Text--root">Polaris CSS Showcase</h1>
+            <p class="Polaris-Text--bodyLg Polaris-Text--root Polaris-Text--subdued">
+                A comprehensive demonstration of all Polaris design system components and styles
+            </p>
+        </s-section>
+
+        <!-- Tabs Example (Polaris-styled, accessible) -->
+
+        <h2 class="Polaris-Text--heading2xl Polaris-Text--root showcase-title">Tabs</h2>
+        <p class="Polaris-Text--bodyMd Polaris-Text--root showcase-desc">Example tab navigation with accessible behavior
+        </p>
+
+        <div class="Polaris-Tabs__Wrapper" style="margin-bottom: var(--p-space-400);">
+            <ul role="tablist" class="Polaris-Tabs" id="tabs-demo" aria-label="Settings tabs">
+                <li class="Polaris-Tabs__TabContainer selected">
+                    <s-clickable href="/support" padding="base" > Amazon Tag</s-clickable>
+                </li>
+                <li class="Polaris-Tabs__TabContainer">
+                    <s-clickable href="/settings" padding="base" >Default Values</s-clickable>
+                </li>
+                <li class="Polaris-Tabs__TabContainer">
+                    <s-clickable href="/settings" padding="base" >Button</s-clickable>
+                </li>
+                <li class="Polaris-Tabs__TabContainer">
+                    <s-clickable href="/settings" padding="base" >Markup Pricing</s-clickable>
+                </li>
+
+            </ul>
+        </div>
+
+
+        <script>
+            (function () {
+                var tablist = document.getElementById('tabs-demo');
+                if (!tablist) return;
+                function activateTab(newTab) {
+                    var tabs = tablist.querySelectorAll('.Polaris-Tabs__Tab');
+                    tabs.forEach(function (tab) {
+                        var selected = tab === newTab;
+                        tab.classList.toggle('Polaris-Tabs__Tab--selected', selected);
+                        var panelId = tab.getAttribute('data-panel');
+                        if (panelId) {
+                            var panel = document.getElementById(panelId);
+                            if (panel) panel.hidden = !selected;
+                        }
+                    });
+                    newTab.focus();
+                }
+                tablist.addEventListener('click', function (e) {
+                    var target = e.target.closest('.Polaris-Tabs__Tab');
+                    if (target) { e.preventDefault(); activateTab(target); }
+                });
+                tablist.addEventListener('keydown', function (e) {
+                    var tabs = Array.prototype.slice.call(tablist.querySelectorAll('.Polaris-Tabs__Tab'));
+                    var current = document.activeElement.closest('.Polaris-Tabs__Tab') || tabs.find(function (t) { return t.classList.contains('Polaris-Tabs__Tab--selected'); });
+                    if (!current) return;
+                    var idx = tabs.indexOf(current);
+                    if (e.key === 'ArrowRight') { e.preventDefault(); activateTab(tabs[(idx + 1) % tabs.length]); }
+                    if (e.key === 'ArrowLeft') { e.preventDefault(); activateTab(tabs[(idx - 1 + tabs.length) % tabs.length]); }
+                });
+            })();
+        </script>
+
+
+        <!-- Typography Section -->
+        <s-section>
+            <h2 class="Polaris-Text--heading2xl Polaris-Text--root showcase-title">Typography</h2>
+            <p class="Polaris-Text--bodyMd Polaris-Text--root showcase-desc">
+                Text styles for headings, body text, and special formatting
+            </p>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Headings</h3>
+                <div class="showcase-box">
+                    <div class="Polaris-Text--heading3xl Polaris-Text--root">Heading 3XL - The largest heading</div>
+                    <div class="Polaris-Text--heading2xl Polaris-Text--root">Heading 2XL - Extra large heading</div>
+                    <div class="Polaris-Text--headingXl Polaris-Text--root">Heading XL - Large heading</div>
+                    <div class="Polaris-Text--headingLg Polaris-Text--root">Heading LG - Medium heading</div>
+                    <div class="Polaris-Text--headingMd Polaris-Text--root">Heading MD - Small heading</div>
+                    <div class="Polaris-Text--headingSm Polaris-Text--root">Heading SM - Smaller heading</div>
+                    <div class="Polaris-Text--headingXs Polaris-Text--root">Heading XS - Smallest heading</div>
+                </div>
+            </div>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Body Text</h3>
+                <div class="showcase-box">
+                    <div class="Polaris-Text--bodyLg Polaris-Text--root">Body Large - For emphasis and important
+                        information</div>
+                    <div class="Polaris-Text--bodyMd Polaris-Text--root">Body Medium - Standard body text for most
+                        content</div>
+                    <div class="Polaris-Text--bodySm Polaris-Text--root">Body Small - For secondary information and
+                        captions</div>
+                    <div class="Polaris-Text--bodyXs Polaris-Text--root">Body XS - For very small text and fine print
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Text Variants</h3>
+                <div class="showcase-box">
+                    <div class="Polaris-Text--root Polaris-Text--base">Default text color</div>
+                    <div class="Polaris-Text--root Polaris-Text--subdued">Subdued text for secondary information</div>
+                    <div class="Polaris-Text--root Polaris-Text--success">Success message text</div>
+                    <div class="Polaris-Text--root Polaris-Text--critical">Critical message text</div>
+                    <div class="Polaris-Text--root Polaris-Text--caution">Caution message text</div>
+                    <div class="Polaris-Text--root Polaris-Text--magic">Magic highlight text</div>
+                    <div class="Polaris-Text--root Polaris-Text--disabled">Disabled text</div>
+                </div>
+            </div>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Font Weights</h3>
+                <div class="showcase-box">
+                    <div class="Polaris-Text--root Polaris-Text--regular">Regular weight (450)</div>
+                    <div class="Polaris-Text--root Polaris-Text--medium">Medium weight (550)</div>
+                    <div class="Polaris-Text--root Polaris-Text--semibold">Semibold weight (650)</div>
+                    <div class="Polaris-Text--root Polaris-Text--bold">Bold weight (700)</div>
+                </div>
+            </div>
+        </s-section>
+
+        <!-- Buttons Section -->
+        <s-section>
+            <h2 class="Polaris-Text--heading2xl Polaris-Text--root showcase-title">Buttons</h2>
+            <p class="Polaris-Text--bodyMd Polaris-Text--root showcase-desc">
+                Interactive buttons in various styles, sizes, and states
+            </p>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Button Variants</h3>
+                <div class="showcase-box">
+                    <div class="showcase-flex-wrap">
+                        <s-button>Default</s-button>
+                        <s-button variant="primary">Primary</s-button>
+                        <s-button variant="secondary">Secondary</s-button>
+                        <s-button variant="tertiary">Tertiary</s-button>
+                        <s-button variant="tertiary">Plain</s-button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Button Sizes</h3>
+                <div class="showcase-box">
+                    <div class="showcase-flex-wrap">
+                        <s-button variant="primary">Micro</s-button>
+                        <s-button variant="primary">Slim</s-button>
+                        <s-button variant="primary">Medium</s-button>
+                        <s-button variant="primary">Large</s-button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Button Tones</h3>
+                <div class="showcase-box">
+                    <div class="showcase-flex-wrap">
+                        <s-button variant="primary" tone="success">Success</s-button>
+                        <s-button variant="primary" tone="critical">Critical</s-button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Button States</h3>
+                <div class="showcase-box">
+                    <div class="showcase-flex-wrap">
+                        <s-button variant="primary" aria-pressed="true">Pressed</s-button>
+                        <s-button variant="primary" disabled>Disabled</s-button>
+                    </div>
+                </div>
+            </div>
+        </s-section>
+
+        <!-- Colors Section -->
+        <s-section>
+            <h2 class="Polaris-Text--heading2xl Polaris-Text--root showcase-title">Colors</h2>
+            <p class="Polaris-Text--bodyMd Polaris-Text--root showcase-desc">
+                Color system with background, text, border, and status colors
+            </p>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Background Colors</h3>
+                <div class="showcase-grid showcase-grid-cols-3">
+                    <div class="showcase-box" style="background: var(--p-color-bg-surface);">
+                        <strong>Surface</strong>
+                        <code>--p-color-bg-surface</code>
+                    </div>
+                    <div class="showcase-box" style="background: var(--p-color-bg-surface-secondary);">
+                        <strong>Secondary</strong>
+                        <code>--p-color-bg-surface-secondary</code>
+                    </div>
+                    <div class="showcase-box" style="background: var(--p-color-bg-surface-tertiary);">
+                        <strong>Tertiary</strong>
+                        <code>--p-color-bg-surface-tertiary</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Status Colors</h3>
+                <div class="showcase-grid showcase-grid-cols-4">
+                    <div class="showcase-box" style="background: var(--p-color-bg-surface-info);">
+                        <strong style="color: var(--p-color-text-info);">Info</strong>
+                        <code style="color: var(--p-color-text-info);">--p-color-bg-surface-info</code>
+                    </div>
+                    <div class="showcase-box" style="background: var(--p-color-bg-surface-success);">
+                        <strong style="color: var(--p-color-text-success);">Success</strong>
+                        <code style="color: var(--p-color-text-success);">--p-color-bg-surface-success</code>
+                    </div>
+                    <div class="showcase-box" style="background: var(--p-color-bg-surface-warning);">
+                        <strong style="color: var(--p-color-text-warning);">Warning</strong>
+                        <code style="color: var(--p-color-text-warning);">--p-color-bg-surface-warning</code>
+                    </div>
+                    <div class="showcase-box" style="background: var(--p-color-bg-surface-critical);">
+                        <strong style="color: var(--p-color-text-critical);">Critical</strong>
+                        <code style="color: var(--p-color-text-critical);">--p-color-bg-surface-critical</code>
+                    </div>
+                </div>
+            </div>
+        </s-section>
+
+        <!-- Spacing Section -->
+        <s-section>
+            <h2 class="Polaris-Text--heading2xl Polaris-Text--root showcase-title">Spacing</h2>
+            <p class="Polaris-Text--bodyMd Polaris-Text--root showcase-desc">
+                Spacing system for consistent layout and component spacing
+            </p>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Space Variables</h3>
+                <div class="showcase-box">
+                    <div style="display: flex; flex-direction: column; gap: var(--p-space-100);">
+                        <div
+                            style="background: var(--p-color-bg-fill-secondary); padding: var(--p-space-100); display: flex; align-items: center;">
+                            <strong style="min-width: 120px;">Space 100:</strong>
+                            <span
+                                style="background: var(--p-color-bg-fill-brand); width: var(--p-space-100); height: var(--p-space-100); display: block;"></span>
+                            <code style="margin-left: var(--p-space-200);">0.25rem</code>
+                        </div>
+                        <div
+                            style="background: var(--p-color-bg-fill-secondary); padding: var(--p-space-200); display: flex; align-items: center;">
+                            <strong style="min-width: 120px;">Space 200:</strong>
+                            <span
+                                style="background: var(--p-color-bg-fill-brand); width: var(--p-space-200); height: var(--p-space-200); display: block;"></span>
+                            <code style="margin-left: var(--p-space-200);">0.5rem</code>
+                        </div>
+                        <div
+                            style="background: var(--p-color-bg-fill-secondary); padding: var(--p-space-400); display: flex; align-items: center;">
+                            <strong style="min-width: 120px;">Space 400:</strong>
+                            <span
+                                style="background: var(--p-color-bg-fill-brand); width: var(--p-space-400); height: var(--p-space-400); display: block;"></span>
+                            <code style="margin-left: var(--p-space-200);">1rem</code>
+                        </div>
+                        <div
+                            style="background: var(--p-color-bg-fill-secondary); padding: var(--p-space-600); display: flex; align-items: center;">
+                            <strong style="min-width: 120px;">Space 600:</strong>
+                            <span
+                                style="background: var(--p-color-bg-fill-brand); width: var(--p-space-600); height: var(--p-space-600); display: block;"></span>
+                            <code style="margin-left: var(--p-space-200);">1.5rem</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </s-section>
+
+        <!-- Shadows Section -->
+        <s-section>
+            <h2 class="Polaris-Text--heading2xl Polaris-Text--root showcase-title">Shadows</h2>
+            <p class="Polaris-Text--bodyMd Polaris-Text--root showcase-desc">
+                Elevation and depth with shadow utilities
+            </p>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Shadow Levels</h3>
+                <div class="showcase-grid showcase-grid-cols-3">
+                    <div class="showcase-box" style="box-shadow: var(--p-shadow-100);">
+                        <strong>Shadow 100</strong>
+                        <code>--p-shadow-100</code>
+                    </div>
+                    <div class="showcase-box" style="box-shadow: var(--p-shadow-300);">
+                        <strong>Shadow 300</strong>
+                        <code>--p-shadow-300</code>
+                    </div>
+                    <div class="showcase-box" style="box-shadow: var(--p-shadow-500);">
+                        <strong>Shadow 500</strong>
+                        <code>--p-shadow-500</code>
+                    </div>
+                </div>
+            </div>
+        </s-section>
+
+        <!-- Borders Section -->
+        <s-section>
+            <h2 class="Polaris-Text--heading2xl Polaris-Text--root showcase-title">Borders</h2>
+            <p class="Polaris-Text--bodyMd Polaris-Text--root showcase-desc">
+                Border radius and width utilities
+            </p>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Border Radius</h3>
+                <div class="showcase-grid showcase-grid-cols-4">
+                    <div class="showcase-box"
+                        style="border-radius: var(--p-border-radius-050); background: var(--p-color-bg-surface-brand);">
+                        <strong>50</strong>
+                        <code>0.125rem</code>
+                    </div>
+                    <div class="showcase-box"
+                        style="border-radius: var(--p-border-radius-100); background: var(--p-color-bg-surface-brand);">
+                        <strong>100</strong>
+                        <code>0.25rem</code>
+                    </div>
+                    <div class="showcase-box"
+                        style="border-radius: var(--p-border-radius-200); background: var(--p-color-bg-surface-brand);">
+                        <strong>200</strong>
+                        <code>0.5rem</code>
+                    </div>
+                    <div class="showcase-box"
+                        style="border-radius: var(--p-border-radius-full); background: var(--p-color-bg-surface-brand); aspect-ratio: 1;">
+                        <strong>Full</strong>
+                        <code>624.9375rem</code>
+                    </div>
+                </div>
+            </div>
+        </s-section>
+
+        <!-- Layout Components -->
+        <section class="showcase-section">
+            <h2 class="Polaris-Text--heading2xl Polaris-Text--root showcase-title">Layout Components</h2>
+            <p class="Polaris-Text--bodyMd Polaris-Text--root showcase-desc">
+                Cards, grids, and other layout components
+            </p>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Grid System</h3>
+                <div class="showcase-grid showcase-grid-cols-4">
+                    <div class="showcase-box">
+                        <strong>Column 1</strong>
+                        <p class="Polaris-Text--bodySm Polaris-Text--root Polaris-Text--subdued">Grid item content</p>
+                    </div>
+                    <div class="showcase-box">
+                        <strong>Column 2</strong>
+                        <p class="Polaris-Text--bodySm Polaris-Text--root Polaris-Text--subdued">Grid item content</p>
+                    </div>
+                    <div class="showcase-box">
+                        <strong>Column 3</strong>
+                        <p class="Polaris-Text--bodySm Polaris-Text--root Polaris-Text--subdued">Grid item content</p>
+                    </div>
+                    <div class="showcase-box">
+                        <strong>Column 4</strong>
+                        <p class="Polaris-Text--bodySm Polaris-Text--root Polaris-Text--subdued">Grid item content</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Theme Variants -->
+        <section class="showcase-section">
+            <h2 class="Polaris-Text--heading2xl Polaris-Text--root showcase-title">Theme Variants</h2>
+            <p class="Polaris-Text--bodyMd Polaris-Text--root showcase-desc">
+                Different theme variations available
+            </p>
+
+            <div class="showcase-group">
+                <div class="showcase-grid showcase-grid-cols-2">
+                    <div class="showcase-box" style="background: var(--p-color-bg);">
+                        <strong>Light Theme</strong>
+                        <p class="Polaris-Text--bodySm Polaris-Text--root">Current active theme</p>
+                        <code>.p-theme-light</code>
+                    </div>
+                    <div class="showcase-box" style="background: var(--p-color-bg);">
+                        <strong>Other Themes</strong>
+                        <p class="Polaris-Text--bodySm Polaris-Text--root">Available theme classes:</p>
+                        <ul style="margin: 0; padding-left: 1.5rem;">
+                            <li><code>.p-theme-light-mobile</code></li>
+                            <li><code>.p-theme-light-high-contrast-experimental</code></li>
+                            <li><code>.p-theme-dark-experimental</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section class="showcase-section">
+            <h2 class="Polaris-Text--heading2xl Polaris-Text--root showcase-title">Settings UI</h2>
+            <p class="Polaris-Text--bodyMd Polaris-Text--root showcase-desc">
+                Form elements and settings interface patterns
+            </p>
+
+            <div class="showcase-group">
+                <!-- Amazon Affiliate ID Section -->
+                <div class="showcase-settings-section">
+                    <div class="showcase-settings-info">
+                        <h3 class="Polaris-Text--headingMd Polaris-Text--root"
+                            style="display: flex; align-items: center; gap: var(--p-space-100);">
+                            Amazon Affiliate ID
+                            <span
+                                style="font-size: var(--p-font-size-300); color: var(--p-color-text-secondary); cursor: help;"
+                                title="Help">?</span>
+                        </h3>
+                        <p class="Polaris-Text--bodySm Polaris-Text--root Polaris-Text--subdued">
+                            Add your Amazon Affiliate ID. To earn commission add products from the marketplaces where
+                            you registered your ID.
+                        </p>
+                    </div>
+                    <div class="showcase-settings-controls">
+                        <div class="showcase-settings-field">
+                            <s-text-field label="Amazon Affiliate ID" value="amaztag-20"></s-text-field>
+                        </div>
+                        <a href="#" class="showcase-settings-link">New to Amazon Affiliate? Join the program here.</a>
+                    </div>
+                </div>
+
+                <div id="tab-panel-general" role="tabpanel" aria-labelledby="tab-general">
+                    <div
+                        style="display: grid; grid-template-columns: minmax(220px, 320px) 1fr; gap: var(--p-space-600); align-items: start; margin-top: var(--p-space-600);">
+                        <div>
+                            <h3 class="Polaris-Text--headingMd Polaris-Text--root"
+                                style="margin: 0 0 var(--p-space-200);">App Enable/Disable</h3>
+                            <p class="Polaris-Text--bodySm Polaris-Text--root Polaris-Text--subdued" style="margin: 0;">
+                                If disabled, Reorder button will not appear in live site.
+                            </p>
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; justify-content: space-between; gap: var(--p-space-400); padding: var(--p-space-400); background: var(--p-color-bg-surface); border: var(--p-border-width-050) solid var(--p-color-border); border-radius: var(--p-border-radius-300); box-shadow: var(--p-shadow-100);">
+                            <p class="Polaris-Text--bodyMd Polaris-Text--root" style="margin: 0;">
+                                Currently, Reorder Master is <strong>Enabled</strong>. Click on the button to disable
+                                it.
+                            </p>
+                            <s-button variant="secondary">Disable</s-button>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab-panel-display" role="tabpanel" aria-labelledby="tab-display" hidden>
+                    <div
+                        style="margin-top: var(--p-space-600); padding: var(--p-space-400); border: var(--p-border-width-050) solid var(--p-color-border); border-radius: var(--p-border-radius-300);">
+                        <p class="Polaris-Text--bodyMd Polaris-Text--root" style="margin: 0;">Display settings content
+                        </p>
+                    </div>
+                </div>
+                <div id="tab-panel-language" role="tabpanel" aria-labelledby="tab-language" hidden>
+                    <div
+                        style="margin-top: var(--p-space-600); padding: var(--p-space-400); border: var(--p-border-width-050) solid var(--p-color-border); border-radius: var(--p-border-radius-300);">
+                        <p class="Polaris-Text--bodyMd Polaris-Text--root" style="margin: 0;">Language settings content
+                        </p>
+                    </div>
+                </div>
+                <div id="tab-panel-email" role="tabpanel" aria-labelledby="tab-email" hidden>
+                    <div
+                        style="margin-top: var(--p-space-600); padding: var(--p-space-400); border: var(--p-border-width-050) solid var(--p-color-border); border-radius: var(--p-border-radius-300);">
+                        <p class="Polaris-Text--bodyMd Polaris-Text--root" style="margin: 0;">Email settings content</p>
+                    </div>
+                </div>
+                <!-- Auto-sync Section -->
+                <div class="showcase-settings-section">
+                    <div class="showcase-settings-info">
+                        <h3 class="Polaris-Text--headingMd Polaris-Text--root">Auto-sync</h3>
+                        <p class="Polaris-Text--bodySm Polaris-Text--root Polaris-Text--subdued">
+                            We will auto update price & availability values to match Amazon so that your inventory and
+                            prices are always up to date.
+                        </p>
+                    </div>
+                    <div class="showcase-settings-controls">
+                        <div class="showcase-checkbox-wrapper">
+                            <s-checkbox label="Auto-sync"></s-checkbox>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Referral Button Section -->
+                <div class="showcase-settings-section">
+
+                    @csrf
+                    <div class="showcase-settings-info">
+                        <h3 class="Polaris-Text--headingMd Polaris-Text--root">Product referral button</h3>
+                        <p class="Polaris-Text--bodySm Polaris-Text--root Polaris-Text--subdued">
+                            Add button to Amazon Product Page on your Shopify Product Page. You can customize button
+                            text as well.
+                        </p>
+                    </div>
+                    <div class="showcase-settings-controls">
+                        <form data-save-bar class="Polaris-Form" action="/product-referral-button" method="post">
+                            <div class="showcase-settings-field">
+                                <s-text-field label="Button text" value="Buy on Amazon"></s-text-field>
+                            </div>
+                            <p class="showcase-instructions">
+                                To activate button: click Activate → click Save in the theme editor
+                            </p>
+                            <s-button disabled style="margin-top: var(--p-space-200);">Activate</s-button>
+                        </form>
+                        <!-- Info Banner -->
+                        <div class="Polaris-Banner Polaris-Banner--withinContentContainer"
+                            style="margin-top: var(--p-space-500); padding: var(--p-space-400); background: var(--p-color-bg-surface-info); border-radius: var(--p-border-radius-200); display: flex; gap: var(--p-space-200); align-items: flex-start;">
+                            <div style="flex-shrink: 0;">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path
+                                        d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z"
+                                        fill="var(--p-color-icon-info)" fill-opacity="0.2" />
+                                    <path
+                                        d="M10 9C10.5523 9 11 8.55228 11 8C11 7.44772 10.5523 7 10 7C9.44772 7 9 7.44772 9 8C9 8.55228 9.44772 9 10 9Z"
+                                        fill="var(--p-color-icon-info)" />
+                                    <path
+                                        d="M10 12C9.44772 12 9 11.5523 9 11L9 10C9 9.44772 9.44772 9 10 9C10.5523 9 11 9.44772 11 10L11 11C11 11.5523 10.5523 12 10 12Z"
+                                        fill="var(--p-color-icon-info)" />
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <p class="Polaris-Text--bodySm Polaris-Text--root"
+                                    style="color: var(--p-color-text-info); margin: 0;">
+                                    By default, the button is displayed for all imported products in your store. If
+                                    you want to select specific products where the button should (or should not) be
+                                    displayed, you can manage this on the <a href="#"
+                                        style="color: var(--p-color-text-link); text-decoration: underline;">Product
+                                        page</a>.
+                                </p>
+                            </div>
+                            <button
+                                style="flex-shrink: 0; background: none; border: none; cursor: pointer; padding: var(--p-space-100); opacity: 0.7; transition: opacity 0.2s;"
+                                onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.7">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="var(--p-color-icon)">
+                                    <path d="M12 4L4 12M4 4L12 12" stroke="currentColor" stroke-width="1.5"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Tables Section -->
+        <section class="showcase-section">
+            <h2 class="Polaris-Text--heading2xl Polaris-Text--root showcase-title">Tables</h2>
+            <p class="Polaris-Text--bodyMd Polaris-Text--root showcase-desc">
+                Data tables for displaying structured information
+            </p>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Basic Table</h3>
+                <div class="Polaris-DataTable"
+                    style="border: var(--p-border-width-050) solid var(--p-color-border); border-radius: var(--p-border-radius-300);">
+                    <div class="Polaris-DataTable__ScrollContainer">
+                        <table class="Polaris-DataTable__Table">
+                            <thead>
+                                <tr>
+                                    <th
+                                        class="Polaris-DataTable__Cell Polaris-DataTable__Cell--header Polaris-DataTable__Cell--firstColumn">
+                                        Product</th>
+                                    <th
+                                        class="Polaris-DataTable__Cell Polaris-DataTable__Cell--header Polaris-DataTable__Cell--numeric">
+                                        Price</th>
+                                    <th class="Polaris-DataTable__Cell Polaris-DataTable__Cell--header">Stock</th>
+                                    <th class="Polaris-DataTable__Cell Polaris-DataTable__Cell--header">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Polaris-DataTable__Cell">Wireless Mouse</td>
+                                    <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--numeric">$29.99</td>
+                                    <td class="Polaris-DataTable__Cell">150</td>
+                                    <td class="Polaris-DataTable__Cell"><span
+                                            class="Polaris-Text--bodySm Polaris-Text--root Polaris-Text--success">In
+                                            Stock</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="Polaris-DataTable__Cell">Keyboard</td>
+                                    <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--numeric">$59.99</td>
+                                    <td class="Polaris-DataTable__Cell">45</td>
+                                    <td class="Polaris-DataTable__Cell"><span
+                                            class="Polaris-Text--bodySm Polaris-Text--root Polaris-Text--caution">Low
+                                            Stock</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="Polaris-DataTable__Cell">Monitor Stand</td>
+                                    <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--numeric">$79.99</td>
+                                    <td class="Polaris-DataTable__Cell">0</td>
+                                    <td class="Polaris-DataTable__Cell"><span
+                                            class="Polaris-Text--bodySm Polaris-Text--root Polaris-Text--critical">Out
+                                            of Stock</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="Polaris-DataTable__Cell">USB Cable</td>
+                                    <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--numeric">$9.99</td>
+                                    <td class="Polaris-DataTable__Cell">200</td>
+                                    <td class="Polaris-DataTable__Cell"><span
+                                            class="Polaris-Text--bodySm Polaris-Text--root Polaris-Text--success">In
+                                            Stock</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Table with Zebra Striping</h3>
+                <div class="Polaris-DataTable Polaris-DataTable__ZebraStripingOnData"
+                    style="border: var(--p-border-width-050) solid var(--p-color-border); border-radius: var(--p-border-radius-300);">
+                    <div class="Polaris-DataTable__ScrollContainer">
+                        <table class="Polaris-DataTable__Table">
+                            <thead>
+                                <tr>
+                                    <th
+                                        class="Polaris-DataTable__Cell Polaris-DataTable__Cell--header Polaris-DataTable__Cell--firstColumn">
+                                        Customer</th>
+                                    <th class="Polaris-DataTable__Cell Polaris-DataTable__Cell--header">Email</th>
+                                    <th
+                                        class="Polaris-DataTable__Cell Polaris-DataTable__Cell--header Polaris-DataTable__Cell--numeric">
+                                        Orders</th>
+                                    <th class="Polaris-DataTable__Cell Polaris-DataTable__Cell--header">Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--firstColumn">John Doe
+                                    </td>
+                                    <td class="Polaris-DataTable__Cell">john.doe@example.com</td>
+                                    <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--numeric">12</td>
+                                    <td class="Polaris-DataTable__Cell">New York</td>
+                                </tr>
+                                <tr>
+                                    <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--firstColumn">Jane Smith
+                                    </td>
+                                    <td class="Polaris-DataTable__Cell">jane.smith@example.com</td>
+                                    <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--numeric">8</td>
+                                    <td class="Polaris-DataTable__Cell">Los Angeles</td>
+                                </tr>
+                                <tr>
+                                    <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--firstColumn">Bob Johnson
+                                    </td>
+                                    <td class="Polaris-DataTable__Cell">bob.johnson@example.com</td>
+                                    <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--numeric">25</td>
+                                    <td class="Polaris-DataTable__Cell">Chicago</td>
+                                </tr>
+                                <tr>
+                                    <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--firstColumn">Alice
+                                        Williams</td>
+                                    <td class="Polaris-DataTable__Cell">alice.williams@example.com</td>
+                                    <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--numeric">5</td>
+                                    <td class="Polaris-DataTable__Cell">Miami</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="showcase-group">
+                <h3 class="Polaris-Text--headingLg Polaris-Text--root showcase-h3">Increased Density Table</h3>
+                <div class="Polaris-DataTable Polaris-DataTable__IncreasedTableDensity"
+                    style="border: var(--p-border-width-050) solid var(--p-color-border); border-radius: var(--p-border-radius-300);">
+                    <div class="Polaris-DataTable__ScrollContainer">
+                        <table class="Polaris-DataTable__Table">
+                            <thead>
+                                <tr>
+                                    <th class="Polaris-DataTable__Cell Polaris-DataTable__Cell--header">ID</th>
+                                    <th class="Polaris-DataTable__Cell Polaris-DataTable__Cell--header">Name</th>
+                                    <th
+                                        class="Polaris-DataTable__Cell Polaris-DataTable__Cell--header Polaris-DataTable__Cell--numeric">
+                                        Value</th>
+                                    <th class="Polaris-DataTable__Cell Polaris-DataTable__Cell--header">Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="Polaris-DataTable__Cell">#001</td>
+                                    <td class="Polaris-DataTable__Cell">Project Alpha</td>
+                                    <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--numeric">$1,250</td>
+                                    <td class="Polaris-DataTable__Cell">Web</td>
+                                </tr>
+                                <tr>
+                                    <td class="Polaris-DataTable__Cell">#002</td>
+                                    <td class="Polaris-DataTable__Cell">Project Beta</td>
+                                    <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--numeric">$850</td>
+                                    <td class="Polaris-DataTable__Cell">Mobile</td>
+                                </tr>
+                                <tr>
+                                    <td class="Polaris-DataTable__Cell">#003</td>
+                                    <td class="Polaris-DataTable__Cell">Project Gamma</td>
+                                    <td class="Polaris-DataTable__Cell Polaris-DataTable__Cell--numeric">$2,100</td>
+                                    <td class="Polaris-DataTable__Cell">API</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer
+            style="margin-top: var(--p-space-1600); padding-top: var(--p-space-800); border-top: var(--p-border-width-050) solid var(--p-color-border); text-align: center;">
+            <p class="Polaris-Text--bodySm Polaris-Text--root Polaris-Text--subdued">
+                Polaris Design System v13.9.5 - Complete CSS Showcase
+            </p>
+        </footer>
+
+    </s-page>
+
+</body>
+
+</html>

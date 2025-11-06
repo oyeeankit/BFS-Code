@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plans - Reorder App</title>
+  <script src="https://cdn.shopify.com/shopifycloud/polaris.js"></script>
+  <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js"></script>
+  <style>
+    body { background: #F6F6F7; }
+    /* Feature icon styling */
+    .feature-icon {
+      width: 20px;
+      height: 20px;
+      color: #008060;
+      flex-shrink: 0;
+    }
+
+    /* Feature list item layout */
+    s-list-item {
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      margin-bottom: 8px !important;
+      min-height: 32px;
+    }
+  </style>
+</head>
+<body>
+  <s-page>
+    <s-section>
+      <s-stack gap="tight">
+        <s-text variant="heading-lg" type="strong">Choose Your Plan</s-text>
+        <s-text tone="subdued">Select the plan that best fits your business needs</s-text>
+      </s-stack>
+    </s-section>
+    <s-section>
+      <s-grid gridTemplateColumns="repeat(auto-fit, minmax(260px, 1fr))" gap="base" style="justify-content:center;">
+        <!-- Basic Plan Card -->
+        <s-box background="default" border="base" borderRadius="base" padding="base" style="max-width:320px;">
+          <s-stack gap="base">
+            <s-stack direction="inline" gap="tight" alignItems="center" justifyContent="center">
+              <s-icon source="star" color="critical" size="large" />
+            </s-stack>
+            <s-text variant="heading-md" type="strong" style="text-align:center;">Basic</s-text>
+            <s-text tone="subdued" style="text-align:center;">$5/month<br><span style="color:#6d7175;">$0.17 per day</span></s-text>
+            <s-button variant="primary" disabled>Current Plan</s-button>
+            <hr style="border:none;border-top:1px solid #E1E3E5; margin:8px 0;">
+            <!-- Basic Plan Features -->
+            <s-list class="plan-card-features basic-features-list">
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>500 Badges</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>100,000+ Icons</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Unlimited Products</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Use Own Images</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Full Styling Options</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Dynamic Data Fields</s-list-item>
+              <s-list-item>
+                <button id="seeMoreBasicFeatures" style="background:none;border:none;color:#005C53;cursor:pointer;font-weight:bold;padding:0;">See more</button>
+              </s-list-item>
+              <s-list-item class="basic-feature-extra" style="display: none !important;"><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>20+ Display Rules</s-list-item>
+              <s-list-item class="basic-feature-extra" style="display: none !important;"><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Schedule Timer</s-list-item>
+            </s-list>
+          </s-stack>
+        </s-box>
+        <!-- Pro Plan Card -->
+        <s-box background="default" border="base" borderRadius="base" padding="base" style="max-width:320px;">
+          <s-stack gap="base">
+            <s-stack direction="inline" gap="tight" alignItems="center" justifyContent="center">
+              <s-icon source="lightning-bolt" color="success" size="large" />
+            </s-stack>
+            <s-text variant="heading-md" type="strong" style="text-align:center;">Pro</s-text>
+            <s-text tone="subdued" style="text-align:center;">$10/month<br><span style="color:#6d7175;">$0.33 per day</span></s-text>
+            <s-button variant="primary">Upgrade to Pro</s-button>
+            <hr style="border:none;border-top:1px solid #E1E3E5; margin:8px 0;">
+            <!-- Pro Plan Features -->
+            <s-list class="plan-card-features pro-features-list">
+              <s-list-item class="feature-summary"><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>All Basic Features</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Links & Tooltips</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Highlights</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Tables</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Country Restriction</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Language Restriction</s-list-item>
+              <s-list-item>
+                <button id="seeMoreProFeatures" style="background:none;border:none;color:#005C53;cursor:pointer;font-weight:bold;padding:0;">See more</button>
+              </s-list-item>
+              <s-list-item class="pro-feature-extra" style="display: none !important;"><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Screen Size Restriction</s-list-item>
+              <s-list-item class="pro-feature-extra" style="display: none !important;"><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Order Count</s-list-item>
+              <s-list-item class="pro-feature-extra" style="display: none !important;"><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Recent Sale Count</s-list-item>
+              <s-list-item class="pro-feature-extra" style="display: none !important;"><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Dynamic Metafields</s-list-item>
+              <s-list-item class="pro-feature-extra" style="display: none !important;"><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Badge Group</s-list-item>
+              <s-list-item class="pro-feature-extra" style="display: none !important;"><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Countdown Timer</s-list-item>
+              <s-list-item class="pro-feature-extra" style="display: none !important;"><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Expected Delivery Date</s-list-item>
+              <s-list-item class="pro-feature-extra" style="display: none !important;"><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Notes</s-list-item>
+              <s-list-item class="pro-feature-extra" style="display: none !important;"><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Banners</s-list-item>
+              <s-list-item class="pro-feature-extra" style="display: none !important;"><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Live Visitors Counter</s-list-item>
+              <s-list-item class="pro-feature-extra" style="display: none !important;"><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Variant Level Badges</s-list-item>
+            </s-list>
+          </s-stack>
+        </s-box>
+        <!-- Gold Plan Card -->
+        <s-box background="default" border="base" borderRadius="base" padding="base" style="max-width:320px;">
+          <s-stack gap="base">
+            <s-stack direction="inline" gap="tight" alignItems="center" justifyContent="center">
+              <s-icon source="leaf" color="warning" size="large" />
+            </s-stack>
+            <s-text variant="heading-md" type="strong" style="text-align:center;">Gold</s-text>
+            <s-text tone="subdued" style="text-align:center;">$20/month<br><span style="color:#6d7175;">$0.67 per day</span></s-text>
+            <s-button variant="primary">Upgrade to Gold</s-button>
+            <hr style="border:none;border-top:1px solid #E1E3E5; margin:8px 0;">
+            <!-- Gold Plan Features -->
+            <s-list class="plan-card-features">
+              <s-list-item class="feature-summary"><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>All Pro Features</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Live Visitors Counter</s-list-item>
+              <s-list-item><s-stack direction="inline" gap="base"><s-icon type="check" /></s-stack>Variant Level Badges</s-list-item>
+              <s-list-item style="visibility:hidden;">Hidden Feature 1</s-list-item>
+              <s-list-item style="visibility:hidden;">Hidden Feature 2</s-list-item>
+              <s-list-item style="visibility:hidden;">Hidden Feature 3</s-list-item>
+              <s-list-item style="visibility:hidden;"><button>See more</button></s-list-item>
+            </s-list>
+          </s-stack>
+          <hr style="border:none;border-top:1px solid #E1E3E5; margin:8px 0;">
+        </s-box>
+      </s-grid>
+    </s-section>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Hide all extra features on load for both plans
+      document.querySelectorAll('.pro-feature-extra').forEach(function(item) {
+        item.style.setProperty('display', 'none', 'important');
+      });
+      document.querySelectorAll('.basic-feature-extra').forEach(function(item) {
+        item.style.setProperty('display', 'none', 'important');
+      });
+      var seeMoreProBtn = document.getElementById('seeMoreProFeatures');
+      if (seeMoreProBtn) {
+        seeMoreProBtn.addEventListener('click', function() {
+          document.querySelectorAll('.pro-feature-extra').forEach(function(item) {
+            item.style.display = 'flex';
+          });
+          // Remove the parent s-list-item of the button from the DOM
+          var parentListItem = seeMoreProBtn.closest('s-list-item');
+          if (parentListItem) {
+            parentListItem.parentNode.removeChild(parentListItem);
+          }
+        });
+      }
+      var seeMoreBasicBtn = document.getElementById('seeMoreBasicFeatures');
+      if (seeMoreBasicBtn) {
+        seeMoreBasicBtn.addEventListener('click', function() {
+          document.querySelectorAll('.basic-feature-extra').forEach(function(item) {
+            item.style.display = 'flex';
+          });
+          // Remove the parent s-list-item of the button from the DOM
+          var parentListItem = seeMoreBasicBtn.closest('s-list-item');
+          if (parentListItem) {
+            parentListItem.parentNode.removeChild(parentListItem);
+          }
+        });
+      }
+    });
+  </script>
+</s-page>
+</body>
+</html>

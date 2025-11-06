@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="shopify-api-key" content="%SHOPIFY_API_KEY%" />
+  <title>Shopify App - Polaris Web Components</title>
+  <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js"></script>
+  <script src="https://cdn.shopify.com/shopifycloud/polaris.js"></script>
+</head>
+<body>
+  <s-page>
+    <s-heading slot="title">Welcome to Reorder App! 🎉</s-heading>
+    <s-text slot="subtitle">Let's get you set up so your customers can start reordering their favorite products.</s-text>
+    
+    <s-box padding="large-300">
+      <s-stack gap="large">
+        <!-- Step 1: Enable Reorder App Embed -->
+        <s-section heading="Step 1: Enable Reorder App Embed">
+          <s-stack display="inline" gap="base">
+            <s-text tone="subdued">Go to Theme Customizer, App Embeds, and enable Reorder App.</s-text>
+            <s-button variant="primary">Enable</s-button>
+          </s-stack>
+        </s-section>
+
+        <!-- Step 2: Configure the app in Settings -->
+        <s-section heading="Step 2: Configure the app in Settings">
+          <s-stack display="inline" gap="base">
+            <s-text tone="subdued">Set up your reorder preferences and customize the app behavior.</s-text>
+            <s-button variant="secondary">Go to Settings</s-button>
+          </s-stack>
+        </s-section>
+      </s-stack>
+    </s-box>
+
+
+  </s-page>
+</body>
+</html>
