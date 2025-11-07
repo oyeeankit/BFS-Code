@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ship Shopify Orders with FBA</title>
+  <meta name="shopify-api-key" content="%SHOPIFY_API_KEY%" />
+  <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js"></script>
+  <script src="https://cdn.shopify.com/shopifycloud/polaris.js"></script>
+</head>
+<body>
+  <s-page>
+    <s-layout>
+      <s-layout-section>
+        <s-card>
+          <s-stack direction="vertical" gap="tight">
+            <!-- Search Bar -->
+            <s-search-field
+              id="searchInput"
+              label="Search"
+              labelAccessibilityVisibility="exclusive"
+              placeholder="Search orders"
+            ></s-search-field>
+
+            <!-- Table -->
+            <s-table id="ordersTable">
+              <s-table-header-row>
+                <s-table-header>Order</s-table-header>
+                <s-table-header>Date ↓</s-table-header>
+                <s-table-header>SKU</s-table-header>
+                <s-table-header>Total</s-table-header>
+                <s-table-header>Payment status</s-table-header>
+                <s-table-header>Fulfillment status</s-table-header>
+                <s-table-header>Items</s-table-header>
+                <s-table-header>Order Tags</s-table-header>
+                <s-table-header>Action</s-table-header>
+              </s-table-header-row>
+              <s-table-body id="tableBody">
+                <!-- Order #1087 -->
+                <s-table-row>
+                  <s-table-cell><s-link url="#">#1087</s-link></s-table-cell>
+                  <s-table-cell>Sep 22 at 4:41 am</s-table-cell>
+                  <s-table-cell>SKU-ANKIT-001</s-table-cell>
+                  <s-table-cell>₹1.06</s-table-cell>
+                  <s-table-cell><s-badge tone="success">Paid</s-badge></s-table-cell>
+                  <s-table-cell><s-badge tone="caution">Unfulfilled</s-badge></s-table-cell>
+                  <s-table-cell>1 item</s-table-cell>
+                  <s-table-cell>Ebay</s-table-cell>
+                  <s-table-cell><s-button>Ship with FBA</s-button></s-table-cell>
+                </s-table-row>
+                
+                <!-- Order #1086 -->
+                <s-table-row>
+                  <s-table-cell><s-link url="#">#1086</s-link></s-table-cell>
+                  <s-table-cell><span class="strikethrough">Jul 31 at 2:08 am</span></s-table-cell>
+                  <s-table-cell><span class="strikethrough">SKU-ABC-002</span></s-table-cell>
+                  <s-table-cell><span class="strikethrough">₹0.00</span></s-table-cell>
+                  <s-table-cell><s-badge tone="neutral">Refunded</s-badge></s-table-cell>
+                  <s-table-cell><s-badge tone="caution">Unfulfilled</s-badge></s-table-cell>
+                  <s-table-cell>0 items</s-table-cell>
+                  <s-table-cell>Outlink</s-table-cell>
+                  <s-table-cell><s-button>Ship with FBA</s-button></s-table-cell>
+                </s-table-row>
+
+                <!-- Order #1085 -->
+                <s-table-row>
+                  <s-table-cell><s-link url="#">#1085</s-link></s-table-cell>
+                  <s-table-cell>Jul 30 at 1:35 am</s-table-cell>
+                  <s-table-cell>SKU-ANKIT-K-003</s-table-cell>
+                  <s-table-cell>₹1,303.63</s-table-cell>
+                  <s-table-cell><s-badge tone="success">Paid</s-badge></s-table-cell>
+                  <s-table-cell><s-badge tone="caution">Unfulfilled</s-badge></s-table-cell>
+                  <s-table-cell>6 items</s-table-cell>
+                  <s-table-cell>Amazon</s-table-cell>
+                  <s-table-cell><s-button>Ship with FBA</s-button></s-table-cell>
+                </s-table-row>
+
+                <!-- Order #1084 -->
+                <s-table-row>
+                  <s-table-cell><s-link url="#">#1084</s-link></s-table-cell>
+                  <s-table-cell><span class="strikethrough">Mar 25 at 2:07 am</span></s-table-cell>
+                  <s-table-cell><span class="strikethrough">SKU-MOH-004</span></s-table-cell>
+                  <s-table-cell><span class="strikethrough">₹156.24</span></s-table-cell>
+                  <s-table-cell><s-badge tone="warning">Partially refunded</s-badge></s-table-cell>
+                  <s-table-cell><s-badge tone="caution">Unfulfilled</s-badge></s-table-cell>
+                  <s-table-cell>2 items</s-table-cell>
+                  <s-table-cell>auto-fba</s-table-cell>
+                  <s-table-cell><s-button>Ship with FBA</s-button></s-table-cell>
+                </s-table-row>
+
+                <!-- Order #1083 -->
+                <s-table-row>
+                  <s-table-cell><s-link url="#">#1083</s-link></s-table-cell>
+                  <s-table-cell>Jan 23 at 3:12 am</s-table-cell>
+                  <s-table-cell>SKU-PROD-005</s-table-cell>
+                  <s-table-cell>₹11.17</s-table-cell>
+                  <s-table-cell><s-badge tone="warning">Partially refunded</s-badge></s-table-cell>
+                  <s-table-cell><s-badge tone="success">Fulfilled</s-badge></s-table-cell>
+                  <s-table-cell>1 item</s-table-cell>
+                  <s-table-cell>manual</s-table-cell>
+                  <s-table-cell><s-button>Ship with FBA</s-button></s-table-cell>
+                </s-table-row>
+              </s-table-body>
+            </s-table>
+          </s-stack>
+        </s-card>
+      </s-layout-section>
+    </s-layout>
+  </s-page>
+
+  <script>
+    // Search functionality
+    function searchTable() {
+      const searchInput = document.getElementById('searchInput');
+      const searchValue = searchInput.value ? searchInput.value.toLowerCase().trim() : '';
+      const tableBody = document.getElementById('tableBody');
+      const rows = tableBody.getElementsByTagName('s-table-row');
+
+      for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        const cells = row.getElementsByTagName('s-table-cell');
+        let found = false;
+
+        // Search across all cells
+        for (let j = 0; j < cells.length; j++) {
+          const cellText = cells[j].textContent.toLowerCase();
+          if (cellText.includes(searchValue)) {
+            found = true;
+            break;
+          }
+        }
+
+        // Show or hide row based on search result
+        if (searchValue === '' || found) {
+          row.classList.remove('hidden-row');
+        } else {
+          row.classList.add('hidden-row');
+        }
+      }
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('searchInput');
+      if (searchInput) {
+        searchInput.addEventListener('input', function(e) {
+          searchTable();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
