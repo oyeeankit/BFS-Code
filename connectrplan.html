@@ -24,7 +24,15 @@
               <s-table>
                 <s-table-header-row>
                   <s-table-header style="background:#F6F6F7; vertical-align:middle;">
-                    <s-text variant="heading-sm" type="strong">SKU Pull Pricing</s-text>
+                    <s-stack direction="inline" gap="tight" alignment="center">
+                      <s-text variant="heading-sm" type="strong">SKU Pull Pricing</s-text>
+                      <s-icon 
+                        type="info" 
+                        onclick="window.open('https://help.shopify.com', '_blank')"
+                        title="Learn more"
+                        style="cursor: pointer; position: relative; top: -px;">
+                      </s-icon>
+                    </s-stack>
                   </s-table-header>
                   <s-table-header style="background:#F6F6F7; vertical-align:middle;"></s-table-header>
                   <s-table-header style="background:#F6F6F7; vertical-align:middle;"></s-table-header>
@@ -68,13 +76,11 @@
                     <s-text variant="heading-sm" type="strong">Maintenance Plan</s-text>
                   </s-table-header>
                   <s-table-header style="background:#F6F6F7; vertical-align:middle;"></s-table-header>
-                  <s-table-header style="background:#F6F6F7; vertical-align:middle;"></s-table-header>
                   <s-table-header style="background:#F6F6F7; text-align:right; vertical-align:middle;">
                     <s-badge tone="warning">Current plan $6/month</s-badge>
                   </s-table-header>
                 </s-table-header-row>
                 <s-table-header-row>
-                  <s-table-header> </s-table-header>
                   <s-table-header> </s-table-header>
                   <s-table-header> </s-table-header>
                   <s-table-header> </s-table-header>
@@ -84,50 +90,38 @@
                     <s-table-cell>Pull</s-table-cell>
                     <s-table-cell>Unlimited SKUs <span style="color:#6d7175;">(credits required)</span></s-table-cell>
                     <s-table-cell></s-table-cell>
-                    <s-table-cell></s-table-cell>
                   </s-table-row>
                   <s-table-row>
                     <s-table-cell>Push</s-table-cell>
                     <s-table-cell>Unlimited SKUs</s-table-cell>
-                    <s-table-cell></s-table-cell>
                     <s-table-cell></s-table-cell>
                   </s-table-row>
                   <s-table-row>
                     <s-table-cell><a href="#" style="color:#0099e5;">Sync</a></s-table-cell>
                     <s-table-cell>$0 / month</s-table-cell>
                     <s-table-cell>
-                      <s-badge tone="info">0 SKU Sync Limit</s-badge>
-                    </s-table-cell>
-                    <s-table-cell>
-                      <input type="number" min="0" value="0" style="width:60px;padding:4px 8px;border-radius:6px;border:1px solid #E1E3E5;font-size:1rem;">
+                      <button onclick="openSyncLimitModal()" style="cursor: pointer; background: none; border: none; padding: 0;">
+                        <s-badge tone="info">0 SKU Sync Limit</s-badge>
+                      </button>
                     </s-table-cell>
                   </s-table-row>
                   <s-table-row>
                     <s-table-cell><a href="#" style="color:#0099e5;">FBM-sync</a></s-table-cell>
                     <s-table-cell>$6 / month</s-table-cell>
-                    <s-table-cell></s-table-cell>
                     <s-table-cell>
-                      <s-stack direction="inline" gap="extraTight">
-                        <s-button size="slim" variant="primary" tone="success">ON</s-button>
-                        <s-button size="slim" variant="secondary">OFF</s-button>
-                      </s-stack>
+                      <s-switch id="fbm-sync-toggle" checked style="transform: scale(1.5);"></s-switch>
                     </s-table-cell>
                   </s-table-row>
                   <s-table-row>
                     <s-table-cell><a href="#" style="color:#0099e5;">Ship with FBA</a></s-table-cell>
                     <s-table-cell>$6 / month</s-table-cell>
-                    <s-table-cell></s-table-cell>
                     <s-table-cell>
-                      <s-stack direction="inline" gap="extraTight">
-                        <s-button size="slim" variant="primary" tone="success">ON</s-button>
-                        <s-button size="slim" variant="secondary">OFF</s-button>
-                      </s-stack>
+                      <s-switch id="ship-fba-toggle" checked style="transform: scale(1.5);"></s-switch>
                     </s-table-cell>
                   </s-table-row>
                   <s-table-row>
                     <s-table-cell><b>Total</b></s-table-cell>
                     <s-table-cell><b>$6 / month</b></s-table-cell>
-                    <s-table-cell></s-table-cell>
                     <s-table-cell>
                       <s-button variant="primary" tone="success">Update Plan</s-button>
                     </s-table-cell>
@@ -140,5 +134,68 @@
       </s-layout-section>
     </s-layout>
   </s-page>
+
+  <!-- Sync Limit Modal -->
+  <s-modal id="syncLimitModal">
+    <div slot="title">Change Sync Limit</div>
+    <div slot="body">
+      <s-stack direction="vertical" gap="base">
+        <s-box background="default" border="base" borderRadius="base" padding="base" style="text-align: center;">
+          <s-text variant="heading-xl" type="strong">$6</s-text><br>
+          <s-text tone="subdued">per month</s-text><br><br>
+          <s-badge>$0.200 per day</s-badge>
+        </s-box>
+        
+        <s-stack direction="inline" gap="tight" alignment="center" style="justify-content: center;">
+          <s-text>Sync</s-text>
+          <input 
+            type="number" 
+            id="skuSyncInput" 
+            min="0" 
+            value="100" 
+            style="width: 70px; padding: 6px 10px; border-radius: 6px; border: 1px solid #C9CCCF; font-size: 1rem; text-align: center;"
+          >
+          <s-text>SKUs</s-text>
+        </s-stack>
+        
+        <s-text style="text-align: center;">Total 100 SKUs</s-text>
+        
+        <s-button variant="primary" style="width: 100%;">UPDATE</s-button>
+      </s-stack>
+    </div>
+  </s-modal>
+
+  <script>
+    // Initialize basic App Bridge to prevent errors (for testing)
+    window.shopify = window.shopify || {};
+    
+    function openSyncLimitModal() {
+      console.log('Opening modal...');
+      const modal = document.getElementById('syncLimitModal');
+      console.log('Modal element:', modal);
+      if (modal) {
+        // Try multiple methods to open the modal
+        modal.setAttribute('open', '');
+        modal.open = true;
+        console.log('Modal open methods executed');
+      } else {
+        console.error('Modal element not found');
+      }
+    }
+
+    // Ensure modal is ready
+    document.addEventListener('DOMContentLoaded', function() {
+      const modal = document.getElementById('syncLimitModal');
+      console.log('Modal loaded:', modal);
+      
+      // Try to suppress App Bridge errors for standalone testing
+      window.addEventListener('error', function(e) {
+        if (e.message && e.message.includes('App Bridge')) {
+          console.warn('App Bridge error suppressed:', e.message);
+          e.preventDefault();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
